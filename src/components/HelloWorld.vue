@@ -1,99 +1,37 @@
 <template>
-  <div class="hello">
+  <div class="hello" >
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-            href="https://vuejs.org"
-            target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-            href="https://forum.vuejs.org"
-            target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-            href="https://chat.vuejs.org"
-            target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-            href="https://twitter.com/vuejs"
-            target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-            href="http://vuejs-templates.github.io/webpack/"
-            target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-            href="http://router.vuejs.org/"
-            target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-            href="http://vuex.vuejs.org/"
-            target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-            href="http://vue-loader.vuejs.org/"
-            target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-            href="https://github.com/vuejs/awesome-vue"
-            target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
-    <component-v1 :msg1="1234"/>
+    <component-v1 :style="{'font-size': this.fontSize + 'em'}" :msg1="'123'" v-on:enlarge-text="enlargeText"/>
+    <test-vmodel v-model="inputVal"/>
+    <date-range-picker />
+
   </div>
 </template>
 
 <script>
 import ComponentV1 from './componentV1'
+import testVmodel from './test-vmodel'
+import DateRangePicker from './date-range-picker'
+import Vue from 'vue'
+
+Vue.use(DateRangePicker)
 
 export default {
   name: 'HelloWorld',
-  components: {ComponentV1},
+  components: {DateRangePicker, ComponentV1 ,testVmodel },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      fontSize: 0.5,
+      inputVal : 'abcdefg'
     }
+  },
+  methods: {
+    enlargeText(event) {
+      console.log(this.fontSize)
+      this.fontSize += event
+    }
+
   }
 }
 </script>

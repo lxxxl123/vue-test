@@ -1,7 +1,6 @@
 <template>
   <div>
-    {{ msg1 }}
-    <button v-on:click="$emit('enlarge-text',v1)">点击我</button>
+    <input v-bind:value="value" v-on:input="value=$event.target.value"/>
   </div>
 </template>
 
@@ -9,16 +8,16 @@
 <script>
 /* 测试抛出事件*/
 export default {
-  name: 'componentV1',
+  name: 'test-vmodel',
   props: {
-    msg1: {
+    value: {
       type: String,
       default: () => "default"
     },
   },
   data () {
     return {
-      v1 : 0.5
+      val:''
     }
   }
 }
