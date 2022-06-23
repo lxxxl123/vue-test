@@ -1,0 +1,74 @@
+<template>
+  <div id="app">
+    <!--1、插槽内容  slot可以接收任何内容、代码，包括组件-->
+    <test-slot>Something bad happened.你是谁啊，我认识你吗</test-slot>
+    <test-slot>
+      Something bad happened.
+      <!--允许使用变量，但该变量必须是本作用域的才会生效，这里name的值将会是"岔道口"-->
+      <h3>标题{{ name }}</h3>
+    </test-slot>
+    <!--2、具名插槽 slo有一个特殊的属性name,可以使插槽具名-->
+    <slot-name>
+      <h3>劝学</h3>
+      <p>少壮不努力，老大徒伤悲</p>
+      <p>光阴似箭，日月如梭</p>
+      <template slot="header">
+        <ul>
+          <li>主页</li>
+          <li>关于时间</li>
+          <li>关于人生</li>
+          <li>关于未来</li>
+        </ul>
+      </template>
+      <p>你好啊</p>
+      <p slot="footer">
+      <p>结尾</p>
+      <p>粤ICP备6545646456415</p>
+
+    </slot-name>
+
+    <!--使用作用域插槽，通过slot-scope实现-->
+    <todo-list :todos="todos">
+      <template slot-scope="slotProps">
+        <span v-if="slotProps.data.isTrue">√</span>
+        {{ slotProps.data.text }}
+      </template>
+    </todo-list>
+
+    <!--使用ES2015结构语法-->
+    <todo-list :todos="todos">
+      <template slot-scope="{data}">
+        <span v-if="data.isTrue">√</span>
+        {{ data.text }}
+      </template>
+    </todo-list>
+  </div>
+</template>
+<script>
+import Vue from 'vue'
+export default {
+  name: 'slot',
+  data () {
+    return {
+      name: '岔道口',
+      todos: [
+        { text: 'A', id: 1, isTrue: true },
+        { text: 'B', id: 2, isTrue: true },
+        { text: 'C', id: 3, isTrue: false },
+        { text: 'D', id: 4, isTrue: true }
+      ]
+    }
+  }
+
+}
+
+
+</script>
+
+<style>
+li {
+  list-style: none;
+  display: inline-block;
+  font-size: 25px;
+}
+</style>
