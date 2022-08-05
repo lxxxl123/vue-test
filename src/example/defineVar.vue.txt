@@ -1,0 +1,47 @@
+<script lang="ts">
+import { defineComponent, reactive, toRefs } from 'vue';
+
+export default defineComponent({
+  setup() {
+    const mapper = Array(10).fill(true);
+    const selectResult = toRefs(
+        reactive(
+            Object.fromEntries(
+                mapper.map((_, i) => {
+                  return [`select${i + 1}`, i % 2 === 0];
+                })
+            )
+        )
+    );
+
+    return selectResult;
+  },
+});
+</script>
+
+<template>
+  <div>select1:{{ select1 }}<input type="checkbox" v-model="select1" /></div>
+  <div>select2:{{ select2 }}<input type="checkbox" v-model="select2" /></div>
+  <div>select3:{{ select3 }}<input type="checkbox" v-model="select3" /></div>
+  <div>select4:{{ select4 }}<input type="checkbox" v-model="select4" /></div>
+  <div>select5:{{ select5 }}<input type="checkbox" v-model="select5" /></div>
+  <div>select6:{{ select6 }}<input type="checkbox" v-model="select6" /></div>
+  <div>select7:{{ select7 }}<input type="checkbox" v-model="select7" /></div>
+  <div>select8:{{ select8 }}<input type="checkbox" v-model="select8" /></div>
+  <div>select9:{{ select9 }}<input type="checkbox" v-model="select9" /></div>
+  <div>select10:{{ select10 }}<input type="checkbox" v-model="select10" /></div>
+</template>
+
+<style scoped>
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #42b883aa);
+}
+</style>
